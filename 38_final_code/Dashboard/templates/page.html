@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>V2V</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script>
+      var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+      // Send request to the server for updates
+      function requestUpdates() {
+        socket.emit('request_car_data');
+      }
+
+      // Listen for updated data from the server
+      socket.on('update_car_data', function(data) {
+        console.log(data); // This will show the whole data object
+        updateCars(data.cars);
+        updateWeather(data.weather);
+      });
+
+
+      // Function to update car data dynamically
+      function updateCars(cars) {
+        for (var i = 0; i < 3; i++) {
+          document.getElementById('car' + i + '-flag').innerText = cars['flag'][i];
+          console.log(cars['flag'][i]);
+          document.getElementById('car' + i + '-distance').innerText = cars['distance'][i];
+          console.log(cars['distance'][i]);
+        }
+      }
+
+      // Function to update weather data dynamically
+      function updateWeather(weather) {
+        for (var i = 0; i < 3; i++) {
+          document.getElementById('weather' + i).innerText = weather['name'][i] + ': ' + weather['val'][i];
+          console.log(weather['name'][i]);
+          console.log(weather['val'][i]);
+        }
+      }
+
+      // Request updates periodically (for example, every 10 seconds)
+      setInterval(requestUpdates, 100);  // Every 10 seconds
+    </script>
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      body {
+        background-image: url("{{ url_for('static', filename='images/cover.jpg') }}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        margin: 0;
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 1;
+      }
+
+      .container {
+        position: relative;
+        z-index: 2;
+        color: white;
+      }
+    </style>
+
+    <link href="{{ url_for('static', filename='css/cover.css') }}" rel="stylesheet">
+  </head>
+  <body class="d-flex h-100 text-center text-white bg-dark body">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column container">
+      <header class="mb-auto">
+        <div>
+          <h3 class="float-md-start mb-0"><a class="nav-link" href="/">V2V</a></h3>
+          <nav class="nav nav-masthead justify-content-center float-md-end">
+            <a class="nav-link" href="/home">Home</a>
+            <a class="nav-link" href="#">Showcase</a>
+            <a class="nav-link" href="/?page=contact">Contact</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="px-3">
+        {% block content %}
+        <div class="container text-center">
+          <div class="row gx-2">
+            <div class="col-sm-5 col-md-6">
+              {% for i in range(3) %}
+              <div class="col">
+                <div class="card bg-dark bg-opacity-25 shadow-lg text-white">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ cars['name'][i] }}</h5>
+                    <p class="card-text">
+                      Flag: <span id="car{{ i }}-flag">{{ cars['flag'][i] }}</span>
+                      Distance: <span id="car{{ i }}-distance">{{ cars['distance'][i] }}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="col-sm-5 col-md-6 mt-5 pt-3">
+              <div class="col">
+                <div class="card bg-dark bg-opacity-25 shadow-lg text-white">
+                  <div class="card-body">
+                    <h5 class="card-title">Weather Condition</h5>
+                    {% for i in range(3) %}
+                    <p class="card-text" id="weather{{ i }}">
+                      {{ weather['name'][i] }}: {{ weather['val'][i] }}
+                    </p>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endblock %}
+      </main>
+
+      <footer class="mt-auto text-white-50">
+        <div class="container"> @V2V </div>
+      </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  </body>
+</html>

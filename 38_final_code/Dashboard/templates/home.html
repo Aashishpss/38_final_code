@@ -1,0 +1,35 @@
+<div class="container text-center">        
+    <div class="row gx-2">
+        <div class="col-sm-5 col-md-6">
+            {% for i in range(3) %}
+                <div class="col">
+                    <div class="card bg-dark bg-opacity-25 shadow-lg text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ cars['name'][i] }}</h5>
+                            <p class="card-text">
+                                Speed: {{ cars['speed'][i] }}
+                                <br>
+                                Flag: {{ cars['flag'][i] }}
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-sm-5 col-md-6">
+            <div class="col">
+                <div class="card bg-dark bg-opacity-25 shadow-lg text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Weather Condition</h5>
+                        {% for i in range(2) %}
+                        <p class="card-text">
+                            {{ weather['name'][i] }}: {{ weather['val'][i] }}
+                        </p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>

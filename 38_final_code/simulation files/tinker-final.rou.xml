@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2024-11-28 15:21:19 by Eclipse SUMO netedit Version 1.21.0
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <!-- VTypes -->
+    <vType id="follower" maxSpeed="20.00"/>
+    <vType id="leader" maxSpeed="20.00"/>
+    <!-- Routes -->
+    <route id="r_0" edges="1265064884#0 1265064884#1 1032517877#0 1032517877#1 1032517877#2 1032517877#3 1032517877#4 1032517877#5 1032517877#6 1032517877#7 1032517877#8 1032517877#9 1032517877#10 1032517877#11 1032517877#12 1032517877#13 1032517877#14 -1177559083 -1265064905#0 -1032481454#4 -1032481454#3 -1032481454#2 -1032481454#1 -1032481454#0 -1032481446#1 -1032552702#2 -1032552702#1 -1032552702#0"/>
+    <route id="r_1" edges="-1032886633#2 1032886633#2 1265064886#0 1265064886#1 1265064886#2 -1032618607#4 -1032618607#3 -1032618607#2 -1032618607#1 -1032618607#0 -1032517877#15 -1177559083 -1265064905#0 -1032481454#4 -1032481454#3 -1032481454#2 -1032481454#1 -1032481454#0 -1032481446#1 -1032552702#2 -1032552702#1 -1032552702#0"/>
+    <!-- Vehicles, persons and containers (sorted by depart) -->
+        <vType id="traffic"/>
+    <!-- Vehicles, persons and containers (sorted by depart) -->
+    <flow id="f_0" type="traffic" begin="0.00" from="1032481450#4" to="-1032517877#9" end="3600.00" vehsPerHour="100"/>
+    <flow id="f_1" type="traffic" begin="0.00" from="-1032618607#0" to="-1265064884#0" via="-1265064884#1" end="3600.00" vehsPerHour="100"/>
+    <flow id="f_2" type="traffic" begin="0.00" from="-1265064886#0" to="-1032618607#0" via="1265064887#1" end="3600.00" vehsPerHour="100"/>
+    <flow id="f_3" type="traffic" begin="0.00" from="1265064902#0" to="1265064904" end="3600.00" vehsPerHour="100"/>
+    <flow id="f_4" type="traffic" begin="0.00" from="1265064884#0" to="1032517877#16" end="3600.00" vehsPerHour="100"/>
+    
+    <vehicle id="leader1" type="leader" depart="0.00" color="cyan" route="r_0"/>
+    <vehicle id="follower1" type="follower" depart="2.00" color="magenta" route="r_0"/>
+      <vehicle id="follower2" type="follower" depart="4.00" color="magenta" route="r_0"/>
+   
+    <vehicle id="leader2" type="leader" depart="4.00" color="128,0,0" route="r_1"/>
+  
+  
+     <vehicle id="follower3" type="follower" depart="6.00" color="128,128,0" route="r_1"/>
+    <vehicle id="follower4" type="follower" depart="8.00" color="128,128,0" route="r_1"/>
+</routes>
